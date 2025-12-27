@@ -1,0 +1,12 @@
+{
+  "domain": "daybetter_led_strip",
+  "name": "Daybetter LED Strip",
+  "codeowners": [
+    "@grimsteel"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/grimsteel/daybetter_led_strip",
+  "iot_class": "assumed_state",
+  "issue_tracker": "https://github.com/grimsteel/daybetter_led_strip/issues",
+  "version": "0.1.0"
+}

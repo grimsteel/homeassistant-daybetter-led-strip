@@ -1,4 +1,4 @@
-"""DataUpdateCoordinator for integration_blueprint."""
+"""DataUpdateCoordinator for daybetter_led_strip."""
 
 from __future__ import annotations
 
