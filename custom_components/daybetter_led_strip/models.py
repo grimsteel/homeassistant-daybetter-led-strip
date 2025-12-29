@@ -9,7 +9,9 @@ if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
     from homeassistant.loader import Integration
 
-    from custom_components.daybetter_led_strip.coordinator import (
+    from daybetter_led_strip import DaybetterLedStrip
+
+    from .coordinator import (
         DaybetterLedStripCoordinator,
     )
 

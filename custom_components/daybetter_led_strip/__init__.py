@@ -2,7 +2,7 @@
 Custom integration to integrate daybetter_led_strip with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/ludeeus/daybetter_led_strip
+https://github.com/grimsteel/daybetter_led_strip
 """
 
 from __future__ import annotations
@@ -20,10 +20,11 @@ from homeassistant.const import (
 from homeassistant.core import callback
 from homeassistant.loader import async_get_loaded_integration
 
-from custom_components.daybetter_led_strip.models import DaybetterLedStripData
+from daybetter_led_strip import DaybetterLedStrip
 
 from .const import DOMAIN
 from .coordinator import DaybetterLedStripCoordinator
+from .models import DaybetterLedStripData
 
 if TYPE_CHECKING:
     from homeassistant.core import Event, HomeAssistant

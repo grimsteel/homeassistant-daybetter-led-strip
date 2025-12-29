@@ -10,6 +10,7 @@ from homeassistant.components.bluetooth import (
 )
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
 from homeassistant.const import CONF_ADDRESS
+from daybetter_led_strip.const import SERVICE_DISCOVERY
 
 from .const import DOMAIN
 
@@ -65,6 +66,7 @@ class DaybetterLedStripConfigFlow(ConfigFlow, domain=DOMAIN):
                 if (
                     discovery.address in current_addresses
                     or discovery.address in self._discovered_devices
+                    or SERVICE_DISCOVERY not in discovery.service_uuids
                 ):
                     continue
                 self._discovered_devices[discovery.address] = discovery
