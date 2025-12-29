@@ -1,12 +1,23 @@
 {
   "domain": "daybetter_led_strip",
   "name": "Daybetter LED Strip",
+  "bluetooth": [
+    {
+      "service_uuid": "0000c031-0000-1000-8000-00805f9b34fb"
+    }
+  ],
   "codeowners": [
     "@grimsteel"
   ],
   "config_flow": true,
+  "dependencies": [
+    "bluetooth_adapters"
+  ],
   "documentation": "https://github.com/grimsteel/daybetter_led_strip",
   "iot_class": "assumed_state",
   "issue_tracker": "https://github.com/grimsteel/daybetter_led_strip/issues",
+  "requirements": [
+    "daybetter-led-strip"
+  ],
   "version": "0.1.0"
 }

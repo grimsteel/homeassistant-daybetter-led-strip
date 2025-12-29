@@ -1,7 +1,4 @@
-"""Constants for daybetter_led_strip."""
-
-from logging import Logger, getLogger
-
-LOGGER: Logger = getLogger(__package__)
+"""Constants for the Daybetter LED Strip integration."""
 
 DOMAIN = "daybetter_led_strip"
+MANUFACTURER = "Daybetter"

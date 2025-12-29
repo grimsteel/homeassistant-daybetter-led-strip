@@ -2,31 +2,30 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from dataclasses import asdict
+from typing import TYPE_CHECKING
 
-from homeassistant.exceptions import ConfigEntryAuthFailed
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.core import callback
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from .api import (
-    IntegrationBlueprintApiClientAuthenticationError,
-    IntegrationBlueprintApiClientError,
-)
+from .models import DaybetterLedStripState
 
 if TYPE_CHECKING:
-    from .data import IntegrationBlueprintConfigEntry
+    from .models import DaybetterLedStripConfigEntry
 
 
-# https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
-class BlueprintDataUpdateCoordinator(DataUpdateCoordinator):
-    """Class to manage fetching data from the API."""
+class DaybetterLedStripCoordinator(DataUpdateCoordinator):
+    """Class to manage pushing data from device."""
 
-    config_entry: IntegrationBlueprintConfigEntry
+    config_entry: DaybetterLedStripConfigEntry
 
-    async def _async_update_data(self) -> Any:
-        """Update data via library."""
-        try:
-            return await self.config_entry.runtime_data.client.async_get_data()
-        except IntegrationBlueprintApiClientAuthenticationError as exception:
-            raise ConfigEntryAuthFailed(exception) from exception
-        except IntegrationBlueprintApiClientError as exception:
-            raise UpdateFailed(exception) from exception
+    @callback
+    def refresh_state(self) -> None:
+        """Refresh the state from the device and push to entities."""
+        state = DaybetterLedStripState(
+            on=self.config_entry.runtime_data.device.power,
+            rssi=self.config_entry.runtime_data.device.rssi,
+            color=self.config_entry.runtime_data.device.color,
+            brightness=self.config_entry.runtime_data.device.brightness,
+        )
+        self.async_set_updated_data(asdict(state))
