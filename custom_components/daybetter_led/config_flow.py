@@ -4,13 +4,13 @@ import logging
 from typing import Any
 
 import voluptuous as vol
+from daybetter_led_strip.const import SERVICE_DISCOVERY
 from homeassistant.components.bluetooth import (
     BluetoothServiceInfoBleak,
     async_discovered_service_info,
 )
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
 from homeassistant.const import CONF_ADDRESS
-from daybetter_led_strip.const import SERVICE_DISCOVERY
 
 from .const import DOMAIN
 

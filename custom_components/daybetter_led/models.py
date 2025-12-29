@@ -6,10 +6,9 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from daybetter_led_strip import DaybetterLedStrip
     from homeassistant.config_entries import ConfigEntry
     from homeassistant.loader import Integration
-
-    from daybetter_led_strip import DaybetterLedStrip
 
     from .coordinator import (
         DaybetterLedStripCoordinator,
@@ -31,7 +30,7 @@ class DaybetterLedStripData:
 class DaybetterLedStripState:
     """State for the Daybetter LED Strip integration."""
 
-    on: bool
-    color: tuple[int, int, int]
-    brightness: int
-    rssi: int
+    on: bool | None
+    color: tuple[int, int, int] | None
+    brightness: int | None
+    rssi: int | None

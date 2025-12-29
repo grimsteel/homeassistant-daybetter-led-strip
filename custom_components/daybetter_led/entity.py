@@ -5,8 +5,7 @@ from __future__ import annotations
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from custom_components.daybetter_led_strip.const import MANUFACTURER
-
+from .const import MANUFACTURER
 from .coordinator import DaybetterLedStripCoordinator
 
 

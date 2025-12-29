@@ -10,6 +10,7 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
+from daybetter_led_strip import DaybetterLedStrip
 from homeassistant.components import bluetooth
 from homeassistant.components.bluetooth.match import ADDRESS, BluetoothCallbackMatcher
 from homeassistant.const import (
@@ -19,8 +20,6 @@ from homeassistant.const import (
 )
 from homeassistant.core import callback
 from homeassistant.loader import async_get_loaded_integration
-
-from daybetter_led_strip import DaybetterLedStrip
 
 from .const import DOMAIN
 from .coordinator import DaybetterLedStripCoordinator
@@ -83,11 +82,11 @@ async def async_setup_entry(
     )
 
     # Listen for changes
-    entry.async_on_unload(led_strip.on_change())
+    entry.async_on_unload(led_strip.on_change(coordinator.refresh_state))
 
     # Attach device info
     if ble_device is not None:
-        led_strip.update_device(ble_device.device, ble_device.advertisement)
+        await led_strip.update_device(ble_device.device, ble_device.advertisement)
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(async_reload_entry))
