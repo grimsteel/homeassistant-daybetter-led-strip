@@ -51,7 +51,8 @@ SUPPORTED_EFFECTS = [
     "blink_yellow",
     "blink_teal",
     "blink_purple",
-    "blink_whitefade_red_green",
+    "blink_white",
+    "fade_red_green",
     "fade_red_blue",
     "fade_green_blue",
     "flash_all",
@@ -75,7 +76,7 @@ def effect_to_effect_str(effect: Effect | None) -> str:
     val = effect - Effect.SWITCH_RGB + 1
     if val <= 0 or val >= len(SUPPORTED_EFFECTS):
         return EFFECT_OFF
-    return SUPPORTED_EFFECTS[val + 1]
+    return SUPPORTED_EFFECTS[val]
 
 
 def effect_str_to_effect(effect_str: str) -> Effect | None:
@@ -109,6 +110,7 @@ class DaybetterLedStripLight(DaybetterLedStripEntity, LightEntity):
     _attr_supported_color_modes = {ColorMode.RGB}  # noqa: RUF012
     _attr_color_mode = ColorMode.RGB
     _attr_supported_features = LightEntityFeature.EFFECT
+    _attr_effect_list = SUPPORTED_EFFECTS
 
     def __init__(
         self,
