@@ -5,6 +5,7 @@ from __future__ import annotations
 import math
 from typing import TYPE_CHECKING
 
+from daybetter_led_strip.const import Effect
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
     ATTR_EFFECT,
@@ -20,7 +21,6 @@ from homeassistant.util.color import brightness_to_value, value_to_brightness
 from .entity import DaybetterLedStripEntity
 
 if TYPE_CHECKING:
-    from daybetter_led_strip.const import Effect
     from homeassistant.core import HomeAssistant
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
