@@ -28,5 +28,6 @@ class DaybetterLedStripCoordinator(DataUpdateCoordinator):
             rssi=self.config_entry.runtime_data.device.rssi,
             color=self.config_entry.runtime_data.device.color,
             brightness=self.config_entry.runtime_data.device.brightness,
+            effect=self.config_entry.runtime_data.device.effect,
         )
         self.async_set_updated_data(asdict(state))

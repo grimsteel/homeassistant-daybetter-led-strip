@@ -13,9 +13,9 @@
   "dependencies": [
     "bluetooth_adapters"
   ],
-  "documentation": "https://github.com/grimsteel/daybetter_led_strip",
+  "documentation": "https://github.com/grimsteel/homeassistant-daybetter-led-strip",
   "iot_class": "assumed_state",
-  "issue_tracker": "https://github.com/grimsteel/daybetter_led_strip/issues",
+  "issue_tracker": "https://github.com/grimsteel/homeassistant-daybetter-led-strip/issues",
   "requirements": [
     "daybetter-led-strip>=0.2.0"
   ],

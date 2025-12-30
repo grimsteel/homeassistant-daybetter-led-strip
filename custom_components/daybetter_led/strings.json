@@ -26,7 +26,37 @@
         },
         "light": {
             "rgb_lights": {
-                "name": "RGB Lights"
+                "name": "RGB Lights",
+                "state_attributes": {
+                    "effect": {
+                        "state": {
+                            "switch_rgb": "Switch RGB",
+                            "switch_all": "Switch All",
+                            "fade_fast": "Fade Fast",
+                            "fade_slow": "Fade Slow",
+                            "blink_red": "Blink Red",
+                            "blink_green": "Blink Green",
+                            "blink_blue": "Blink Blue",
+                            "blink_yellow": "Blink Yellow",
+                            "blink_teal": "Blink Teal",
+                            "blink_purple": "Blink Purple",
+                            "blink_white": "Blink White",
+                            "fade_red_green": "Fade Red Green",
+                            "fade_red_blue": "Fade Red Blue",
+                            "fade_green_blue": "Fade Green Blue",
+                            "flash_all": "Flash All",
+                            "flash_red": "Flash Red",
+                            "flash_green": "Flash Green",
+                            "flash_blue": "Flash Blue",
+                            "flash_yellow": "Flash Yellow",
+                            "flash_teal": "Flash Teal",
+                            "flash_purple": "Flash Purple",
+                            "flash_white": "Flash White",
+                            "strobe_rgb": "Strobe RGB",
+                            "strobe_all": "Strobe All"
+                        }
+                    }
+                }
             }
         }
     }

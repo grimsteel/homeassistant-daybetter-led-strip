@@ -35,3 +35,4 @@ class DaybetterLedStripState:
     color: tuple[int, int, int] | None
     brightness: int | None
     rssi: int | None
+    effect: int | None
