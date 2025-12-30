@@ -16,12 +16,15 @@ The LED strip doesn't actually publish any state information about its color or 
 
 **Screenshots:**
 
-![Full Device](assets/screenshot-device.png) ![Light Control](assets/screenshot-light.png)
+<p float="left">
+<img alt="Full Device" src="assets/screenshot-device.png" width="66%" /> <img alt="Light Control" src="assets/screenshot-light.png" width="33%" />
+</p>
 
 If the device goes offline, the integration will attempt to automatically reconnect to it when it is rediscovered/comes back online.
 
 In my testing this was somewhat unreliable with an ESPHome BLE Proxy, likely due to weird platform issues.
 
 ## Backend and Protocol Information
+
 
 This integration uses my [`daybetter-led-strip` package](https://github.com/grimsteel/daybetter-led-strip). The README for that project includes
