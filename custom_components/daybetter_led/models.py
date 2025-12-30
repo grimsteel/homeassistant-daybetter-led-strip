@@ -30,6 +30,7 @@ class DaybetterLedStripData:
 class DaybetterLedStripState:
     """State for the Daybetter LED Strip integration."""
 
+    connected: bool | None
     on: bool | None
     color: tuple[int, int, int] | None
     brightness: int | None

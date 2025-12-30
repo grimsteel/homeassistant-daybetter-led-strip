@@ -17,7 +17,7 @@
   "iot_class": "assumed_state",
   "issue_tracker": "https://github.com/grimsteel/daybetter_led_strip/issues",
   "requirements": [
-    "daybetter-led-strip"
+    "daybetter-led-strip>=0.2.0"
   ],
   "version": "0.1.0"
 }

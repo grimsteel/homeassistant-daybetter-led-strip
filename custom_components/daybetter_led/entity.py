@@ -12,10 +12,9 @@ from .coordinator import DaybetterLedStripCoordinator
 class DaybetterLedStripEntity(CoordinatorEntity[DaybetterLedStripCoordinator]):
     """Superclass for all entities with device info and coordinator prefilled."""
 
-    def __init__(self, coordinator: DaybetterLedStripCoordinator) -> None:
+    def __init__(self, coordinator: DaybetterLedStripCoordinator, key: str) -> None:
         """Initialize."""
         super().__init__(coordinator)
-        self._attr_unique_id = coordinator.config_entry.entry_id
         self._attr_device_info = DeviceInfo(
             identifiers={
                 (
@@ -25,4 +24,7 @@ class DaybetterLedStripEntity(CoordinatorEntity[DaybetterLedStripCoordinator]):
             },
             manufacturer=MANUFACTURER,
             name=coordinator.config_entry.title,
+        )
+        self._attr_unique_id = (
+            f"{self.coordinator.config_entry.runtime_data.device.address}_{key}"
         )

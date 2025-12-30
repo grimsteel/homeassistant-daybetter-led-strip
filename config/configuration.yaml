@@ -9,4 +9,4 @@ homeassistant:
 logger:
   default: info
   logs:
-    custom_components.daybetter_led_strip: debug
+    custom_components.daybetter_led: debug

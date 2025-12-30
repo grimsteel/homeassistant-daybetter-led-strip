@@ -23,6 +23,7 @@ class DaybetterLedStripCoordinator(DataUpdateCoordinator):
     def refresh_state(self) -> None:
         """Refresh the state from the device and push to entities."""
         state = DaybetterLedStripState(
+            connected=self.config_entry.runtime_data.device.connected,
             on=self.config_entry.runtime_data.device.power,
             rssi=self.config_entry.runtime_data.device.rssi,
             color=self.config_entry.runtime_data.device.color,

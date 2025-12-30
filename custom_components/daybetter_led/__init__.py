@@ -8,6 +8,7 @@ https://github.com/grimsteel/daybetter_led_strip
 from __future__ import annotations
 
 import logging
+import traceback
 from typing import TYPE_CHECKING
 
 from daybetter_led_strip import DaybetterLedStrip
@@ -34,7 +35,7 @@ if TYPE_CHECKING:
 _LOGGER = logging.getLogger(__name__)
 
 PLATFORMS: list[Platform] = [
-    Platform.BINARY_SENSOR,
+    Platform.SENSOR,
     Platform.LIGHT,
 ]
 
@@ -81,12 +82,25 @@ async def async_setup_entry(
         coordinator=coordinator,
     )
 
+    @callback
+    def _on_strip_state_change() -> None:
+        try:
+            coordinator.refresh_state()
+        except Exception:
+            _LOGGER.exception(
+                "Error while refreshing state: %s", traceback.format_exc()
+            )
+            raise
+
     # Listen for changes
-    entry.async_on_unload(led_strip.on_change(coordinator.refresh_state))
+    entry.async_on_unload(led_strip.on_change(_on_strip_state_change))
 
     # Attach device info
     if ble_device is not None:
         await led_strip.update_device(ble_device.device, ble_device.advertisement)
+    else:
+        # force refresh with no device
+        coordinator.refresh_state()
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(async_reload_entry))

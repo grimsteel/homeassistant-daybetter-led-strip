@@ -42,10 +42,12 @@ class DaybetterLedStripConfigFlow(ConfigFlow, domain=DOMAIN):
         """Handle the user step to pick discovered device."""
         errors: dict[str, str] = {}
 
+        # user picked a device
         if user_input is not None:
             address = user_input[CONF_ADDRESS]
             discovery_info = self._discovered_devices[address]
             local_name = discovery_info.name
+            # use the address as unique id
             await self.async_set_unique_id(
                 discovery_info.address, raise_on_progress=False
             )
@@ -59,13 +61,16 @@ class DaybetterLedStripConfigFlow(ConfigFlow, domain=DOMAIN):
             )
 
         if discovery := self._discovery_info:
+            # If we came from bluetooth discovery, use only that device
             self._discovered_devices[discovery.address] = discovery
         else:
             current_addresses = self._async_current_ids(include_ignore=False)
             for discovery in async_discovered_service_info(self.hass):
                 if (
+                    # filter out already configured devices
                     discovery.address in current_addresses
                     or discovery.address in self._discovered_devices
+                    # make sure it's a Daybetter LED Strip
                     or SERVICE_DISCOVERY not in discovery.service_uuids
                 ):
                     continue
@@ -77,6 +82,7 @@ class DaybetterLedStripConfigFlow(ConfigFlow, domain=DOMAIN):
         data_schema = vol.Schema(
             {
                 vol.Required(CONF_ADDRESS): vol.In(
+                    # Populate the dropdown with discovered devices
                     {
                         service_info.address: (
                             f"{service_info.name} ({service_info.address})"
