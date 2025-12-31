@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import math
 from typing import TYPE_CHECKING
 
@@ -18,6 +19,8 @@ from homeassistant.components.light.const import ColorMode, LightEntityFeature
 from homeassistant.core import callback
 from homeassistant.util.color import brightness_to_value, value_to_brightness
 
+from custom_components.daybetter_led.const import CONF_COLOR_CORRECTION
+
 from .entity import DaybetterLedStripEntity
 
 if TYPE_CHECKING:
@@ -26,6 +29,8 @@ if TYPE_CHECKING:
 
     from .coordinator import DaybetterLedStripCoordinator
     from .models import DaybetterLedStripConfigEntry
+
+_LOGGER = logging.getLogger(__name__)
 
 ENTITY_DESCRIPTIONS = (
     LightEntityDescription(
@@ -151,7 +156,14 @@ class DaybetterLedStripLight(DaybetterLedStripEntity, LightEntity):
             )
 
         if ATTR_RGB_COLOR in kwargs:
-            await device.set_color(kwargs[ATTR_RGB_COLOR])
+            await device.set_color(
+                kwargs[ATTR_RGB_COLOR],
+                # default to True
+                color_correction=self.coordinator.config_entry.options.get(
+                    CONF_COLOR_CORRECTION,
+                    True,
+                ),
+            )
 
         if ATTR_EFFECT in kwargs:
             effect = effect_str_to_effect(kwargs[ATTR_EFFECT])

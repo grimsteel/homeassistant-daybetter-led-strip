@@ -15,6 +15,16 @@
             "already_configured": "This entry is already configured."
         }
     },
+    "options": {
+        "step": {
+            "init": {
+                "description": "Color correction reduces the intensity of the green and blue LEDs and applies a gamma scaling function. This results in more accurate colors.",
+                "data": {
+                    "color_correction": "Enable color correction"
+                }
+            }
+        }
+    },
     "entity": {
         "sensor": {
             "bluetooth_rssi": {

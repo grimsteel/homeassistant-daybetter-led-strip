@@ -14,6 +14,8 @@ The integration will autodiscover devices with the appropriate Bluetooth service
 
 The LED strip doesn't actually publish any state information about its color or current effect, so Home Assistant will just show the last known state.
 
+The integration automatically applies color correction to get more accurate colors displayed on the LEDs. You can disable this in the integration options.
+
 **Screenshots:**
 
 <p float="left">

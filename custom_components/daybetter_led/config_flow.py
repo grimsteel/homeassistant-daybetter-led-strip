@@ -11,6 +11,10 @@ from homeassistant.components.bluetooth import (
 )
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
 from homeassistant.const import CONF_ADDRESS
+from homeassistant.core import callback
+
+from custom_components.daybetter_led.models import DaybetterLedStripConfigEntry
+from custom_components.daybetter_led.options_flow import DaybetterLedStripOptionsFlow
 
 from .const import DOMAIN
 
@@ -97,3 +101,11 @@ class DaybetterLedStripConfigFlow(ConfigFlow, domain=DOMAIN):
             data_schema=data_schema,
             errors=errors,
         )
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(
+        _config_entry: DaybetterLedStripConfigEntry,
+    ) -> DaybetterLedStripOptionsFlow:
+        """Create the options flow."""
+        return DaybetterLedStripOptionsFlow()
