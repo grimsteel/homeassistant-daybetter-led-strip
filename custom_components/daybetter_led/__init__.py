@@ -103,7 +103,6 @@ async def async_setup_entry(
         coordinator.refresh_state()
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-    entry.async_on_unload(entry.add_update_listener(async_reload_entry))
 
     @callback
     async def _async_stop(_event: Event) -> None:
@@ -123,12 +122,6 @@ async def async_unload_entry(
     entry: DaybetterLedStripConfigEntry,
 ) -> bool:
     """Handle removal of an entry."""
+    # disconnect
+    await entry.runtime_data.device.disconnect()
     return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
-
-
-async def async_reload_entry(
-    hass: HomeAssistant,
-    entry: DaybetterLedStripConfigEntry,
-) -> None:
-    """Reload config entry."""
-    await hass.config_entries.async_reload(entry.entry_id)
